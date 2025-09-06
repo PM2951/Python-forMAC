@@ -56,7 +56,7 @@
       eval "$(/opt/homebrew/bin/brew shellenv)"
       ```
    
-   **Intel (x86\_64)** の方は次の1行を貼り付けて保存：
+      **Intel (x86\_64)** の方は次の1行を貼り付けて保存：
 
       ```bash
       eval "$(/usr/local/bin/brew shellenv)"
@@ -72,27 +72,27 @@
 
    1. 設定ファイルを開く：
 
-   ```bash
-   open -e ~/.bash_profile
-   ```
+      ```bash
+      open -e ~/.bash_profile
+      ```
 
    2. **Appleシリコン (arm64)** の方は次を貼り付けて保存：
 
-   ```bash
-   eval "$(/opt/homebrew/bin/brew shellenv)"
-   ```
+      ```bash
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+      ```
 
    **Intel (x86\_64)** の方は次を貼り付けて保存：
 
-   ```bash
-   eval "$(/usr/local/bin/brew shellenv)"
-   ```
+      ```bash
+      eval "$(/usr/local/bin/brew shellenv)"
+      ```
 
    3. 反映：
 
-   ```bash
-   source ~/.bash_profile
-   ```
+      ```bash
+      source ~/.bash_profile
+      ```
 
    > `open -e` は mac の TextEdit を開きます。VS Code を使いたい場合は `code ~/.zprofile` などでもOKです（`code` コマンドが有効な場合）。
 
