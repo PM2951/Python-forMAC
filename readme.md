@@ -82,7 +82,7 @@
       eval "$(/opt/homebrew/bin/brew shellenv)"
       ```
 
-   **Intel (x86\_64)** の方は次を貼り付けて保存：
+      **Intel (x86\_64)** の方は次を貼り付けて保存：
 
       ```bash
       eval "$(/usr/local/bin/brew shellenv)"
