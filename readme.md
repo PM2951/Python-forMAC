@@ -21,7 +21,11 @@
    echo $SHELL
    ```
 
-3. **開発者ツール（Xcode Command Line Tools）**
+   → （zshを使っている場合の例） /bin/zsh
+
+   zshとbashでややコードが異なるため、注意してください。
+
+4. **開発者ツール（Xcode Command Line Tools）**
 
    * Pythonのビルドに必要です。未導入ならインストール：
 
@@ -120,62 +124,63 @@
 
    1. ファイルを開く：
 
-   ```bash
-   open -e ~/.zshrc
-   ```
+      ```bash
+      open -e ~/.zshrc
+      ```
 
    2. 下記を末尾へ貼り付けて保存：
 
-   ```bash
-   export PYENV_ROOT="$HOME/.pyenv"
-   command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-   eval "$(pyenv init -)"
-   # （任意）仮想環境外での pip を禁止
-   export PIP_REQUIRE_VIRTUALENV=true
-   ```
+      ```bash
+      export PYENV_ROOT="$HOME/.pyenv"
+      export PATH="$PYENV_ROOT/bin:$PATH"
+      eval "$(pyenv init --path)"
+      eval "$(pyenv init -)"
+      ```
 
    3. 反映：
 
-   ```bash
-   source ~/.zshrc
-   ```
+      ```bash
+      source ~/.zshrc
+      ```
 
    **(b) bash の場合（`.bashrc` に追記し、`.bash_profile` から読み込む）**
 
    1. `.bashrc` を開く：
 
-   ```bash
-   open -e ~/.bashrc
-   ```
+      ```bash
+      open -e ~/.bashrc
+      ```
 
    2. 下記を貼り付けて保存：
-
-   ```bash
-   export PYENV_ROOT="$HOME/.pyenv"
-   command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-   eval "$(pyenv init -)"
-   export PIP_REQUIRE_VIRTUALENV=true
-   ```
+   
+      ```bash
+      export PYENV_ROOT="$HOME/.pyenv"
+      export PATH="$PYENV_ROOT/bin:$PATH"
+      eval "$(pyenv init --path)"
+      eval "$(pyenv init -)"
+      ```
 
    3. `.bash_profile` から `.bashrc` を読み込む設定（未設定なら追加）：
+  
+      bash_profileを開く
 
-   ```bash
-   open -e ~/.bash_profile
-   ```
+         ```bash
+         open -e ~/.bash_profile
+         ```
 
-   追加して保存：
-
-   ```bash
-   [[ -r ~/.bashrc ]] && . ~/.bashrc
-   ```
+      追加して保存：
+   
+         ```bash
+         [[ -r ~/.bashrc ]] && . ~/.bashrc
+         ```
 
    4. 反映：
 
-   ```bash
-   source ~/.bash_profile
-   ```
+      ```bash
+      source ~/.bash_profile
+      ```
 
-3. **依存ライブラリ**（Pythonをビルドするため、必要に応じて）（Pythonをビルドするため、必要に応じて）
+3. **依存ライブラリ**（任意：Pythonをビルドするため、必要に応じて）
 
    ```bash
    brew install openssl readline sqlite3 xz zlib tcl-tk
@@ -201,24 +206,36 @@
 
    例：3.12.x や 3.13.x など、安定版の**最新マイナー**を選ぶのがおすすめです。
 
-2. **インストール**（例：3.12.**x** の最新）
+2. **Pythonのインストール**（例：3.12.1 ）
+
+   ！ここではpython 3.12.1をインストールしてみます。状況に応じてインストールするバージョンは変更してください。
 
    ```bash
-   pyenv install 3.12.\
+   pyenv install 3.12.1
    ```
 
-   ※ `Tab` 補完や `--list` で実際の最新番号を確認して埋めてください（例：`3.12.6`）。
 
-3. **グローバル（全体デフォルト）を設定**
+4. **グローバル（全体デフォルト）を設定**
+
+   Macだとデフォルトでpython 2.10 などが入っているかもしれないので、バージョンを先ほどインストールしたものに変更する。
+
+   ！ここではpython 3.12.1を設定してみます。状況に応じてバージョンを変更してください。
 
    ```bash
-   pyenv global 3.12.x
-   exec $SHELL -l   # シェル再読み込み（またはターミナル再起動）
+   pyenv global 3.12.1
+   ```
+
+   ターミナルを一度閉じて開き直す。
+
+
+   ```bash
    python --version
    which python
    ```
 
-   * `which python` が `~/.pyenv/shims/python` を指していればOK。
+   * `python --version` が `Python 3.12.1` を指していればOK。
+
+   * `which python` が `~/.pyenv/shims/python` または、`<自分のMACの名前>/.pyenv/shims/python`を指していればOK。
 
 > **プロジェクトごと**にバージョンを固定したい場合は、そのフォルダで `pyenv local 3.12.x` を使います（`.python-version` が作成されます）。
 
@@ -233,7 +250,12 @@
    pip --version
    ```
 
-2. **グローバルへ直接インストールしない保護**（推奨）
+
+   
+
+**（ここからばカスタマイズ向けで、やらなくても問題はないです）**
+
+2. **グローバルへ直接インストールしない保護**
 
    * `~/.zshrc` に以下を追記：
 
@@ -244,7 +266,7 @@
 
      これで、**仮想環境外での `pip install` を防止**でき、環境が壊れにくくなります。
 
-3. **pip の設定ファイル**（必要な人向け）
+3. **pip の設定ファイル**
 
    * macOSのユーザ設定ファイル：`~/.config/pip/pip.conf`
    * 例：インデックスURLを明示して安定運用（通常は既定のままでOK）
@@ -259,7 +281,7 @@
 
 ---
 
-## 5. venv とは？（仮想環境の基礎）
+## 5. 仮想環境　venv とは？
 
 * **venv** はプロジェクト専用のPythonとライブラリの「箱」。
 * プロジェクトごとに独立してライブラリを管理でき、他のプロジェクトへ影響しません。
@@ -268,9 +290,8 @@
   1. `pyenv` で **Python本体**（バージョン）を切り替える。
   2. その上で `venv` を **プロジェクトごと**に作る。
 
----
 
-## 6. venv の作り方（作成 → 有効化 → 無効化）
+## venv の作り方（作成 → 有効化 → 無効化）
 
 以下は、任意の新規プロジェクト `myproj` を例にした手順です。
 
@@ -284,8 +305,7 @@
 2. **（任意）このプロジェクトに使う Python を固定**
 
    ```bash
-   pyenv local 3.12.x
-   python --version   # 期待のバージョンか確認
+   pyenv local 3.12.1
    ```
 
 3. **venv を作成**（フォルダ名は `.venv` が慣例）
@@ -301,6 +321,15 @@
    ```
 
    * プロンプトの先頭に `(.venv)` が付きます。これが**仮想環境が有効**の印。
+  
+   * 別の名前の仮想環境を作りたいとき（new_venvという環境を作る場合）
+
+     ```bash
+     python -m venv new_venv
+     source new_venv/bin/activate
+     ```
+
+     となります。名前の部分（new_venv）を入れ替えることで独自の仮想環境を構築できます。
 
 5. **パッケージのインストール例**
 
@@ -308,19 +337,12 @@
    pip install requests numpy pandas
    ```
 
-6. **依存関係の保存**（再現性のために）
-
-   ```bash
-   pip freeze > requirements.txt
-   ```
-
-7. **無効化（deactivate）**
+6. **無効化（deactivate）**
 
    ```bash
    deactivate
    ```
 
-> VS Code を使う場合：ワークスペースを `myproj` に開き、コマンドパレット（⇧⌘P）→「Python: Select Interpreter」で `.venv` を選択すると、自動でその環境を使えます。
 
 ---
 
@@ -343,11 +365,7 @@
 
   * `source .venv/bin/activate` を忘れていないか確認。
 
----
-
-## 8. 片付け・アンインストール
-
-* **特定のPythonバージョンを削除**
+* **片付け・アンインストール**
 
   ```bash
   pyenv uninstall 3.12.x
@@ -380,20 +398,8 @@
    python hello.py
    ```
 
----
 
-## 10. まとめ（最小セット）
-
-1. Homebrew を入れて PATH を通す。
-2. `brew install pyenv`。
-3. `~/.zshrc` に pyenv 初期化を追記して `source ~/.zshrc`。
-4. `pyenv install <最新版>` → `pyenv global <同じ>`。
-5. プロジェクトごとに `python -m venv .venv` → `source .venv/bin/activate`。
-6. `pip install ...`（**sudo は使わない**）。
-
----
-
-## コラム（重要）：`~/.zshrc` と `~/.zprofile` の違い
+## `~/.zshrc` と `~/.zprofile` の違い
 
 **結論（TL;DR）**
 
@@ -452,12 +458,3 @@
   ```
 * うまく反映しない場合は **ターミナルを再起動**。
 
----
-
-### 参考キーワード（公式ドキュメント）
-
-* Homebrew Documentation（brewのインストール・shellenv）
-* pyenv README（インストールと `pyenv init -`）
-* Python公式ドキュメント（`venv`, `pip`）
-
-> この手順は、公式ドキュメントの一般的な推奨事項に沿った**保守的で安全な構成**です。これで研究・開発の多くの用途に十分対応できます。
