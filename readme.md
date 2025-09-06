@@ -1,6 +1,6 @@
-# MacでのPython環境構築ガイド
+# MacでのPython環境構築ガイド（初心者向け・ステップバイステップ）
 
-> 目的：**Homebrew → pyenv → Python → venv** の順に、はじめての方でも迷わず環境構築できるようにします。Macの標準シェル **zsh** を前提にしています（macOS向け）。
+> 目的：**Homebrew → pyenv → Python → venv** の順に、はじめての方でも迷わず環境構築できるようにします。Macの標準シェル **zsh** を前提にしています（macOS Catalina以降の標準）。
 
 ---
 
@@ -20,7 +20,6 @@
    ```bash
    echo $SHELL
    ```
-   例）zsh使ってるなら /usr/local/bin/zsh とでる
 
 3. **開発者ツール（Xcode Command Line Tools）**
 
@@ -34,36 +33,70 @@
 
 ## 1. Homebrew をインストールする（Macの定番パッケージ管理）
 
-1. **インストールコマンド**（公式推奨）
+1. **インストールコマンド**（公式推奨　https://brew.sh/　）
 
-   https://brew.sh/
-
-   以下はあくまでも2025年時点でのコード例。公式ページにコードがあるので、それをコピペするのが無難
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
-   
 
-3. **PATHの設定（必須）**
+2. **PATHの設定（必須）**
+   使っている **シェルごと** に設定ファイルが異なります。**テキストエディタ（TextEdit）で開いて追記**する方法にします。
 
-   * Appleシリコン（多くの最新Mac）：
+   **(a) zsh の場合（macOS標準）**
 
-     ```bash
-     echo 'eval "$($(brew --prefix)/bin/brew shellenv)"' >> ~/.zprofile
-     eval "$($(brew --prefix)/bin/brew shellenv)"
-     ```
+   1. 設定ファイルを開く（なければ新規作成されます）
 
-     ※ `$(brew --prefix)` は通常 `/opt/homebrew` です。
-   * Intel Mac：
+   ```bash
+   open -e ~/.zprofile
+   ```
 
-     ```bash
-     echo 'eval "$($(brew --prefix)/bin/brew shellenv)"' >> ~/.zprofile
-     eval "$($(brew --prefix)/bin/brew shellenv)"
-     ```
+   2. **Appleシリコン (arm64)** の方は、開いたウィンドウの末尾に次の1行を貼り付けて保存：
 
-     ※ Intel では多くの場合 `/usr/local` が prefix です。
+   ```bash
+   eval "$(/opt/homebrew/bin/brew shellenv)"
+   ```
 
-4. **確認**
+   **Intel (x86\_64)** の方は次の1行を貼り付けて保存：
+
+   ```bash
+   eval "$(/usr/local/bin/brew shellenv)"
+   ```
+
+   3. 反映：
+
+   ```bash
+   source ~/.zprofile
+   ```
+
+   **(b) bash の場合**
+
+   1. 設定ファイルを開く：
+
+   ```bash
+   open -e ~/.bash_profile
+   ```
+
+   2. **Appleシリコン (arm64)** の方は次を貼り付けて保存：
+
+   ```bash
+   eval "$(/opt/homebrew/bin/brew shellenv)"
+   ```
+
+   **Intel (x86\_64)** の方は次を貼り付けて保存：
+
+   ```bash
+   eval "$(/usr/local/bin/brew shellenv)"
+   ```
+
+   3. 反映：
+
+   ```bash
+   source ~/.bash_profile
+   ```
+
+   > `open -e` は mac の TextEdit を開きます。VS Code を使いたい場合は `code ~/.zprofile` などでもOKです（`code` コマンドが有効な場合）。
+
+3. **確認**
 
    ```bash
    brew -v
@@ -81,16 +114,68 @@
    brew install pyenv
    ```
 
-2. **シェル初期化設定を追加**（`~/.zshrc` に追記）
+2. **シェル初期化設定を追加**（zsh / bash でファイルが異なります）
+
+   **(a) zsh の場合（`.zshrc` に追記）**
+
+   1. ファイルを開く：
 
    ```bash
-   echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
-   echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
-   echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+   open -e ~/.zshrc
+   ```
+
+   2. 下記を末尾へ貼り付けて保存：
+
+   ```bash
+   export PYENV_ROOT="$HOME/.pyenv"
+   command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+   eval "$(pyenv init -)"
+   # （任意）仮想環境外での pip を禁止
+   export PIP_REQUIRE_VIRTUALENV=true
+   ```
+
+   3. 反映：
+
+   ```bash
    source ~/.zshrc
    ```
 
-3. **依存ライブラリ**（Pythonをビルドするため、必要に応じて）
+   **(b) bash の場合（`.bashrc` に追記し、`.bash_profile` から読み込む）**
+
+   1. `.bashrc` を開く：
+
+   ```bash
+   open -e ~/.bashrc
+   ```
+
+   2. 下記を貼り付けて保存：
+
+   ```bash
+   export PYENV_ROOT="$HOME/.pyenv"
+   command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+   eval "$(pyenv init -)"
+   export PIP_REQUIRE_VIRTUALENV=true
+   ```
+
+   3. `.bash_profile` から `.bashrc` を読み込む設定（未設定なら追加）：
+
+   ```bash
+   open -e ~/.bash_profile
+   ```
+
+   追加して保存：
+
+   ```bash
+   [[ -r ~/.bashrc ]] && . ~/.bashrc
+   ```
+
+   4. 反映：
+
+   ```bash
+   source ~/.bash_profile
+   ```
+
+3. **依存ライブラリ**（Pythonをビルドするため、必要に応じて）（Pythonをビルドするため、必要に応じて）
 
    ```bash
    brew install openssl readline sqlite3 xz zlib tcl-tk
@@ -305,6 +390,67 @@
 4. `pyenv install <最新版>` → `pyenv global <同じ>`。
 5. プロジェクトごとに `python -m venv .venv` → `source .venv/bin/activate`。
 6. `pip install ...`（**sudo は使わない**）。
+
+---
+
+## コラム（重要）：`~/.zshrc` と `~/.zprofile` の違い
+
+**結論（TL;DR）**
+
+* `~/.zprofile`：**ログイン**時に1回だけ読み込まれる設定。**PATHなど一度だけ設定すればよい環境変数**を置く。
+* `~/.zshrc`：**対話シェル**を開くたびに読み込まれる設定。**エイリアス／補完／プロンプト／pyenvの初期化**など、対話操作向け設定を置く。
+
+**読み込み順序（代表例）**
+
+1. `~/.zshenv`（常に）
+2. `~/.zprofile`（ログイン時）
+3. `~/.zshrc`（対話時）
+4. `~/.zlogin`（ログイン時、最後）
+
+> macOS の Terminal.app は既定で **ログインシェル**として zsh を起動するため、通常は **`.zprofile` も `.zshrc` も両方**読み込まれます。iTerm2 や VS Code は設定次第で挙動が変わる場合があります。
+
+**どっちに書く？（典型例）**
+
+* Homebrew の PATH（zsh）：**`.zprofile`**
+
+  ```bash
+  # Appleシリコン
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  # Intel の場合はこちらを使用
+  # eval "$(/usr/local/bin/brew shellenv)"
+  ```
+* Homebrew の PATH（bash）：**`.bash_profile`**
+
+  ````bash
+  # Appleシリコン
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  # Intel の場合はこちらを使用
+  # eval "$(/usr/local/bin/brew shellenv)"
+  ```bash
+  # ~/.zprofile
+  eval "$($(brew --prefix)/bin/brew shellenv)"
+  ````
+* 一度だけ通せばよい PATH や環境変数（例：`PATH`, `LANG`）：**`.zprofile`**
+* pyenv の初期化や対話用の設定（エイリアス・プロンプト・補完）：**`.zshrc`**
+
+  ```bash
+  # ~/.zshrc
+  export PYENV_ROOT="$HOME/.pyenv"
+  command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
+  # pip を仮想環境外で使えなくする保護（任意）
+  export PIP_REQUIRE_VIRTUALENV=true
+  ```
+
+**反映方法**
+
+* ファイルを編集したら、当該ファイルを再読み込み：
+
+  ```bash
+  source ~/.zprofile   # zprofile を編集した直後
+  source ~/.zshrc      # zshrc を編集した直後
+  ```
+* うまく反映しない場合は **ターミナルを再起動**。
 
 ---
 
