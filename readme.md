@@ -44,29 +44,29 @@
 
    **(a) zsh の場合（macOS標準）**
 
-   1. 設定ファイルを開く（なければ新規作成されます）
-
-   ```bash
-   open -e ~/.zprofile
-   ```
-
-   2. **Appleシリコン (arm64)** の方は、開いたウィンドウの末尾に次の1行を貼り付けて保存：
-
-   ```bash
-   eval "$(/opt/homebrew/bin/brew shellenv)"
-   ```
-
-   **Intel (x86\_64)** の方は次の1行を貼り付けて保存：
-
-   ```bash
-   eval "$(/usr/local/bin/brew shellenv)"
-   ```
-
-   3. 反映：
-
-   ```bash
-   source ~/.zprofile
-   ```
+         1. 設定ファイルを開く（なければ新規作成されます）
+      
+            ```bash
+            open -e ~/.zprofile
+            ```
+      
+         2. **Appleシリコン (arm64)** の方は、開いたウィンドウの末尾に次の1行を貼り付けて保存：
+      
+            ```bash
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+            ```
+         
+         **Intel (x86\_64)** の方は次の1行を貼り付けて保存：
+      
+            ```bash
+            eval "$(/usr/local/bin/brew shellenv)"
+            ```
+      
+         3. 反映：
+      
+            ```bash
+            source ~/.zprofile
+            ```
 
    **(b) bash の場合**
 
