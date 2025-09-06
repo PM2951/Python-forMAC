@@ -20,7 +20,7 @@
    ```bash
    echo $SHELL
    ```
-   例） /usr/local/bin/zsh # <- zsh使ってる
+   例）zsh使ってるなら /usr/local/bin/zsh とでる
 
 3. **開発者ツール（Xcode Command Line Tools）**
 
@@ -36,11 +36,14 @@
 
 1. **インストールコマンド**（公式推奨）
 
+   https://brew.sh/
+
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
+   
 
-2. **PATHの設定（必須）**
+3. **PATHの設定（必須）**
 
    * Appleシリコン（多くの最新Mac）：
 
@@ -59,7 +62,7 @@
 
      ※ Intel では多くの場合 `/usr/local` が prefix です。
 
-3. **確認**
+4. **確認**
 
    ```bash
    brew -v
