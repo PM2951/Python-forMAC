@@ -20,6 +20,7 @@
    ```bash
    echo $SHELL
    ```
+   例） /usr/local/bin/zsh # <- zsh使ってる
 
 3. **開発者ツール（Xcode Command Line Tools）**
 
