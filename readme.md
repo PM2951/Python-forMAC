@@ -38,6 +38,7 @@
 
    https://brew.sh/
 
+   以下はあくまでも2025年時点でのコード例。公式ページにコードがあるので、それをコピペするのが無難
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
