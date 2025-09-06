@@ -33,7 +33,7 @@
 
 ## 1. Homebrew をインストールする（Macの定番パッケージ管理）
 
-1. **インストールコマンド**（公式推奨　https://brew.sh/　）
+1. **インストールコマンド**（公式推奨）　https://brew.sh/
 
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
