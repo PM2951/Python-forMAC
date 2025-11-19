@@ -4,7 +4,11 @@
 > 
 ---
 
-以下でPythonを練習できます。  (<https://github.com/PM2951/Python-practice/blob/main/README.md>)
+以下でPythonを練習できます。 
+
+(<https://github.com/PM2951/Python-practice/blob/main/README.md>)
+
+
 ---
 
 ## 0. いまのMacの状態を確認する
