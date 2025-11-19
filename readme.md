@@ -1,7 +1,10 @@
 # MacでのPython環境構築ガイド
 
 > 目的：**Homebrew → pyenv → Python → venv** の順に、はじめての方でも迷わず環境構築できるようにします。Macの標準シェル **zsh** を前提にしています（macOS Catalina以降の標準）。
+> 
+---
 
+以下でPythonを練習できます。  (<https://github.com/PM2951/Python-practice/blob/main/README.md>)
 ---
 
 ## 0. いまのMacの状態を確認する
