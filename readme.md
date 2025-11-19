@@ -33,6 +33,22 @@
    xcode-select --install
    ```
 
+5. **VS Codeアプリをインストールする**
+
+   これはプログラミングのコードを書くときの便利ツールです。
+
+   色つけたり自動修正してくれたり、AIでコード生成してくれたりとめちゃくちゃ便利なので、入れることをお勧めします。
+
+   <https://code.visualstudio.com/>
+
+   入れたのちに、拡張パッケージでよりレベルアップできます。
+
+   <https://pythonsoba.tech/vscode-extension/>
+   これを参考に入れてみると良いです。
+
+   最低でも "Pylance"と"Jupyter"を入れとくと良いです。
+   
+
 ---
 
 ## 1. Homebrew をインストールする（Macの定番パッケージ管理）
