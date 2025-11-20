@@ -262,6 +262,22 @@
 
 > **プロジェクトごと**にバージョンを固定したい場合は、そのフォルダで `pyenv local 3.12.x` を使います（`.python-version` が作成されます）。
 
+5. 動作確認
+
+   ```bash
+   python
+   ```
+   pythonのコンソールが有効化されます。
+   
+   
+4. 以下のコードを実行：
+
+   ```python
+   print("Hello, Python on Mac!")
+   ```
+
+   Hello, Python on Mac!と出ると思います
+
 ---
 
 ## 4. pip の基本設定（安全＆快適に使う）
@@ -270,41 +286,20 @@
 
    ```bash
    python -m pip install --upgrade pip setuptools wheel
+   ```
+
+2. 動作確認
+   
+   ```bash
    pip --version
    ```
 
-
-   
-
-**（ここからばカスタマイズ向けで、やらなくても問題はないです）**
-
-2. **グローバルへ直接インストールしない保護**
-
-   * `~/.zshrc` に以下を追記：
-
-     ```bash
-     echo 'export PIP_REQUIRE_VIRTUALENV=true' >> ~/.zshrc
-     source ~/.zshrc
-     ```
-
-     これで、**仮想環境外での `pip install` を防止**でき、環境が壊れにくくなります。
-
-3. **pip の設定ファイル**
-
-   * macOSのユーザ設定ファイル：`~/.config/pip/pip.conf`
-   * 例：インデックスURLを明示して安定運用（通常は既定のままでOK）
-
-     ```ini
-     # ~/.config/pip/pip.conf
-     [global]
-     index-url = https://pypi.org/simple
-     ```
 
 > **禁止事項**：`sudo pip install` は環境破壊の主因になりがちなので避けましょう。
 
 ---
 
-## 5. 仮想環境　venv とは？
+## （以下任意） 5. 仮想環境　venv を使ってみる？
 
 * **venv** はプロジェクト専用のPythonとライブラリの「箱」。
 * プロジェクトごとに独立してライブラリを管理でき、他のプロジェクトへ影響しません。
@@ -401,30 +396,6 @@
   ```
 
 ---
-
-## 9. 動作確認（Hello, world!）
-
-1. 仮想環境を有効化：
-
-   ```bash
-   cd ~/projects/myproj
-   source .venv/bin/activate
-   ```
-2. 動作確認
-
-   ```bash
-   python
-   ```
-   pythonのコンソールが有効化されます。
-   
-   
-4. 以下のコードを実行：
-
-   ```python
-   print("Hello, Python on Mac!")
-   ```
-
-   Hello, Python on Mac!と出ると思います
 
 
 ## `~/.zshrc` と `~/.zprofile` の違い
