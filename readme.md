@@ -6,9 +6,8 @@
 > 
 ---
 
-セットアップが完了したあとは、以下でPythonの練習ができます。 
-
- ==> (<https://github.com/PM2951/Python-practice/blob/main/README.md>)
+セットアップが完了したあとは、以下でPythonの練習ができます。   
+    ==> (<https://github.com/PM2951/Python-practice/blob/main/README.md>)
 
 
 ---
