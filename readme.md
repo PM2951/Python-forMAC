@@ -410,16 +410,21 @@
    cd ~/projects/myproj
    source .venv/bin/activate
    ```
-2. スクリプト `hello.py` を作成：
+2. 動作確認
+
+   ```bash
+   python
+   ```
+   pythonのコンソールが有効化されます。
+   
+   
+4. 以下のコードを実行：
 
    ```python
    print("Hello, Python on Mac!")
    ```
-3. 実行：
 
-   ```bash
-   python hello.py
-   ```
+   Hello, Python on Mac!と出ると思います
 
 
 ## `~/.zshrc` と `~/.zprofile` の違い
