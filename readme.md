@@ -2,6 +2,7 @@
 
 > 目的：**Homebrew → pyenv → Python → venv** の順に、はじめての方でも迷わず環境構築できるようにします。  
 > Macの標準シェル **zsh** を前提にしています（macOS Catalina以降の標準）。
+> Windowsの方はごめんなさい。無理です。
 > 
 ---
 
