@@ -7,7 +7,8 @@
 ---
 
 セットアップが完了したあとは、以下でPythonの練習ができます。   
-    ==> (<https://github.com/PM2951/Python-practice/blob/main/README.md>)
+    - 基礎練習 (<https://github.com/PM2951/Python-practice>)  
+    - グラフ作成（<https://github.com/PM2951/Python-graph>）
 
 
 ---
