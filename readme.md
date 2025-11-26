@@ -9,8 +9,10 @@
 セットアップが完了したあとは、以下でPythonの練習ができます。   
     - [基礎練習](https://github.com/PM2951/Python-practice)    
     - [グラフ作成練習](https://github.com/PM2951/Python-graph)  
-    - [DNA解析練習](https://github.com/PM2951/Python-dna)
-    - [機械学習AI練習](https://github.com/PM2951/Python-AI)
+    - [DNA解析練習](https://github.com/PM2951/Python-dna)  
+    - [機械学習AI練習](https://github.com/PM2951/Python-AI)  
+    
+
 
 
 ---
